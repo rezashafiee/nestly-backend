@@ -1,0 +1,81 @@
+INSERT INTO users (id, email, name, created_at) VALUES
+    ('seller-maya', 'maya@nestly.app', 'Maya', DATE_SUB(UTC_TIMESTAMP(6), INTERVAL 30 DAY)),
+    ('seller-jonas', 'jonas@nestly.app', 'Jonas', DATE_SUB(UTC_TIMESTAMP(6), INTERVAL 29 DAY)),
+    ('seller-elena', 'elena@nestly.app', 'Elena', DATE_SUB(UTC_TIMESTAMP(6), INTERVAL 28 DAY)),
+    ('seller-amir', 'amir@nestly.app', 'Amir', DATE_SUB(UTC_TIMESTAMP(6), INTERVAL 27 DAY));
+
+INSERT INTO listings (
+    id,
+    title,
+    category,
+    price,
+    item_condition,
+    location,
+    description,
+    seller_id,
+    created_at,
+    photo_icon_key,
+    photo_color_value,
+    likes,
+    is_mine
+) VALUES
+    (
+        'listing-desk',
+        'Vintage oak desk',
+        'Furniture',
+        180.00,
+        'Good',
+        'Prenzlauer Berg',
+        'Solid oak writing desk with three drawers and brass pulls.',
+        'seller-maya',
+        DATE_SUB(UTC_TIMESTAMP(6), INTERVAL 3 HOUR),
+        'desk',
+        4290241735,
+        28,
+        0
+    ),
+    (
+        'listing-bike',
+        'City bike with basket',
+        'Sports',
+        240.00,
+        'Like new',
+        'Mitte',
+        'Lightweight commuter bike, tuned this month, includes lock.',
+        'seller-jonas',
+        DATE_SUB(UTC_TIMESTAMP(6), INTERVAL 7 HOUR),
+        'bike',
+        4294956709,
+        44,
+        0
+    ),
+    (
+        'listing-lamp',
+        'Warm ceramic lamp',
+        'Home',
+        65.00,
+        'New',
+        'Kreuzberg',
+        'Handmade lamp with dimmable bulb and linen shade.',
+        'seller-elena',
+        DATE_SUB(UTC_TIMESTAMP(6), INTERVAL 1 DAY),
+        'lamp',
+        4294952665,
+        19,
+        0
+    ),
+    (
+        'listing-headphones',
+        'Noise cancelling headphones',
+        'Electronics',
+        120.00,
+        'Good',
+        'Friedrichshain',
+        'Comfortable over-ear headphones with case and cable.',
+        'seller-amir',
+        DATE_SUB(UTC_TIMESTAMP(6), INTERVAL 2 DAY),
+        'electronics',
+        4291671259,
+        33,
+        0
+    );
