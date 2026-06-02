@@ -26,6 +26,7 @@ class ListingService(
         category: String?,
         condition: String?,
         sort: String?,
+        viewerEmail: String?,
     ): List<ListingResponse> {
         val search = query?.trim()?.lowercase().orEmpty()
         val categoryFilter = category?.trim().takeUnless { it.isNullOrBlank() || it == "All" }
@@ -44,12 +45,14 @@ class ListingService(
             .filter { listing -> conditionFilter == null || listing.condition == conditionFilter }
             .toList()
 
-        return sort(filtered, sort).map(listingMapper::toResponse)
+        return sort(filtered, sort).map { listing ->
+            listingMapper.toResponse(listing, viewerEmail)
+        }
     }
 
     @Transactional(readOnly = true)
-    fun get(id: String): ListingResponse {
-        return listingMapper.toResponse(findById(id))
+    fun get(id: String, viewerEmail: String?): ListingResponse {
+        return listingMapper.toResponse(findById(id), viewerEmail)
     }
 
     @Transactional
@@ -78,10 +81,12 @@ class ListingService(
             photoIconKey = photo.iconKey,
             photoColorValue = photo.colorValue,
             likes = 0,
-            isMine = true,
         )
 
-        return listingMapper.toResponse(listingRepository.save(listing))
+        return listingMapper.toResponse(
+            listingRepository.save(listing),
+            viewerEmail = request.sellerEmail,
+        )
     }
 
     @Transactional(readOnly = true)

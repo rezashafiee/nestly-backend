@@ -77,8 +77,8 @@ Content-Type: application/json
 
 ```http
 GET /api/listings
-GET /api/listings?q=bike&category=Sports&condition=Like%20new&sort=popular
-GET /api/listings/listing-bike
+GET /api/listings?q=bike&category=Sports&condition=Like%20new&sort=popular&viewerEmail=sara@example.com
+GET /api/listings/listing-bike?viewerEmail=sara@example.com
 ```
 
 ```http

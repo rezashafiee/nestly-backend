@@ -21,6 +21,7 @@ data class ListingResponse(
     val location: String,
     val description: String,
     val sellerName: String,
+    val sellerEmail: String,
     val createdAt: Instant,
     val photo: PhotoAssetDto,
     val likes: Int,

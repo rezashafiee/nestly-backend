@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component
 
 @Component
 class ListingMapper {
-    fun toResponse(listing: ListingEntity): ListingResponse {
+    fun toResponse(listing: ListingEntity, viewerEmail: String? = null): ListingResponse {
+        val sellerEmail = listing.seller.email
         return ListingResponse(
             id = listing.id,
             title = listing.title,
@@ -17,13 +18,14 @@ class ListingMapper {
             location = listing.location,
             description = listing.description,
             sellerName = listing.seller.name,
+            sellerEmail = sellerEmail,
             createdAt = listing.createdAt,
             photo = PhotoAssetDto(
                 iconKey = listing.photoIconKey,
                 colorValue = listing.photoColorValue,
             ),
             likes = listing.likes,
-            isMine = listing.isMine,
+            isMine = viewerEmail?.trim()?.equals(sellerEmail, ignoreCase = true) == true,
         )
     }
 }

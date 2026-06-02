@@ -25,17 +25,22 @@ class ListingsController(
         @RequestParam(required = false) category: String?,
         @RequestParam(required = false) condition: String?,
         @RequestParam(required = false) sort: String?,
+        @RequestParam(required = false) viewerEmail: String?,
     ): List<ListingResponse> {
         return listingService.list(
             query = q,
             category = category,
             condition = condition,
             sort = sort,
+            viewerEmail = viewerEmail,
         )
     }
 
     @GetMapping("/{id}")
-    fun get(@PathVariable id: String): ListingResponse = listingService.get(id)
+    fun get(
+        @PathVariable id: String,
+        @RequestParam(required = false) viewerEmail: String?,
+    ): ListingResponse = listingService.get(id, viewerEmail)
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
